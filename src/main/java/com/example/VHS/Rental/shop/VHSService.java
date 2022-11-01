@@ -32,7 +32,7 @@ public class VHSService {
         vhsRepository.save(vhs);
     }
 
-    public void deleteByIdVhs (Long id){
+    public void deleteVhsByIdV (Long id){
         vhsRepository.deleteById(id);
     }
 

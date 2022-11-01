@@ -1,32 +1,40 @@
 package com.example.VHS.Rental.shop;
 
+
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 
 @Entity
-@Table(name = "vhs")
+@Table(name = "rental")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class VHS {
+public class Rental {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    private String title;
-    private Integer availability;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long rentalId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "vhs_id")
+    private VHS vhs;
+    private Date dateOfRental;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        VHS vhs = (VHS) o;
-        return id != null && Objects.equals(id, vhs.id);
+        Rental rental = (Rental) o;
+        return rentalId != null && Objects.equals(rentalId, rental.rentalId);
     }
 
     @Override
@@ -34,3 +42,4 @@ public class VHS {
         return getClass().hashCode();
     }
 }
+

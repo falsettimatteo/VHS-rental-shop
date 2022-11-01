@@ -28,13 +28,13 @@ public class VhsController {
 
 
     @RequestMapping("/all")
-    public List<VHS> returnAll() {
+    public List<VHS> returnAllVhs() {
         return vhsService.getAllVhs();
     }
 
 
     @RequestMapping( value = "/insert",consumes = "application/json",method = RequestMethod.POST) //problem insertion of 2 movie with same name
-    public String insert(@RequestBody VHS vhs){
+    public String insertVHS(@RequestBody VHS vhs){
         //problem insertion of 2 movie with same name
             vhsService.addVhs(vhs);
             log.info("User ok");

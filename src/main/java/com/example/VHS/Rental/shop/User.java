@@ -1,37 +1,37 @@
 package com.example.VHS.Rental.shop;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-@Getter
-@Setter
+import java.util.Objects;
+
 @Entity
 @Table(name = "user")
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-    private String userEmail;
-    private String userPassword;
+    private Long id;
+    private String email;
+    private String password;
     private String role;
 
-    public User() {}
-    public User(String email, String password, String role) {
-        super();
-        this.userEmail = email;
-        this.userPassword = password;
-        this.role = role;
-    }
-    public User( String email, String password) {
-        super();
-        this.userEmail = email;
-        this.userPassword = password;
-        this.role = "ROLE_USER";
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
     }
 
-
-
-
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
